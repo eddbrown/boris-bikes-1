@@ -24,5 +24,9 @@ DEFAULT_CAPACITY = 10
   	bike_count == @capacity
   end
 
+  def avaliable_bikes
+  	@bikes.reject { |bike| bike.broken? }
+  end
+
 end
 
