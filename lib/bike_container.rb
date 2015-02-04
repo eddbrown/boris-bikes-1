@@ -24,6 +24,7 @@ module BikeContainer
 	end
 
 	def release(bike)
+		raise 'There are no bikes!' if bike_count == 0
 		bikes.delete(bike)
 	end
 
@@ -35,3 +36,4 @@ module BikeContainer
 		bikes.reject {|bike| bike.broken?}
 	end
 end
+

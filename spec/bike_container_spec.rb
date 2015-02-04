@@ -14,6 +14,7 @@ describe BikeContainer do
 	let(:holder) { ContainerHolder.new }
 	let(:working_bike) { double :bike, broken?: false}
 	let(:broken_bike) { double :bike, broken?: true}
+	let(:cat) { double :cat }
 
 	it 'should accept a bike' do
 		expect(holder.bike_count).to eq(0)
@@ -43,7 +44,11 @@ describe BikeContainer do
 		holder.dock(working_bike)
 		holder.dock(broken_bike)
 		expect(holder.available_bikes).to eq([working_bike])
+	end
 
+	it 'should not release a bike if it is not there' do
+		holder.bikes
+		expect(lambda { holder.release(bike) }).to raise_error(RuntimeError, 'There are no bikes!')
 	end
 
 	
