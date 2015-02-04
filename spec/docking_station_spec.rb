@@ -6,11 +6,12 @@ describe DockingStation do
 	def fill_station(station)
 		20.times { station.dock(bike) }
 	end
-	
-	#let(:bike) { Bike.new }
-	let(:bike) {double :bike, fix!: false}#you can add in methods and return values to build a bike
-	#e.g. 
-	#let(:bike) {double :bike, working? : true, fix!: }
+
+
+	let(:bike) { double :bike}
+	let(:working_bike) { double :bike, broken?: false}
+	let(:broken_bike) { double :bike, broken?: true}
+
 	let(:station) { DockingStation.new(capacity: 20)}
 
 
@@ -39,9 +40,11 @@ describe DockingStation do
 		expect(lambda { station.dock(bike) }).to raise_error(RuntimeError, 'Station is full')
 	end
 
-	it 'should fix itself' do
-		station.dock(bike)
-		expect(bike.fix!).to eq true#here this takes in the method defines in double.
+	it 'should provide the list of avaliable bikes' do
+		station.dock(working_bike)
+		station.dock(broken_bike)
+		expect(station.avaliable_bikes).to eq([working_bike])
+
 	end
 
 end
