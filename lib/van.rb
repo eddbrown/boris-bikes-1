@@ -15,4 +15,10 @@ class Van
 		@bikes.count
 	end
 
+	def check_and_load(bike)
+		if location == "station" && bike.broken? == true
+			load(bike)
+		end
+	end
+
 end
