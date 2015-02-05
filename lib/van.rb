@@ -1,6 +1,6 @@
 class Van
 
-	attr_accessor :location
+	attr_reader :bikes
 
 	def initialize
 		@bikes = []
@@ -15,10 +15,16 @@ class Van
 		@bikes.count
 	end
 
-	def check_and_load(bike)
-		if location == "station" && bike.broken? == true
-			load(bike)
+	# def check_and_load(bike, station)
+	# 	if station.is_a?(DockingStation) && bike.broken?
+	# 		load(bike)
+	# 	end
+	# end
+
+	def collect_broken_bikes_from station
+		station.bikes.each do |bike|
+			load bike if bike.broken?
+			station.release bike if bike.broken?
 		end
 	end
-
 end

@@ -1,6 +1,6 @@
 require './lib/bike_container'
 
-class ContainerHolder
+class Station
 	include BikeContainer
  end
 
@@ -11,7 +11,7 @@ describe BikeContainer do
 	end
 
 	let(:bike) { double :bike }
-	let(:holder) { ContainerHolder.new }
+	let(:holder) { Station.new }
 	let(:working_bike) { double :bike, broken?: false}
 	let(:broken_bike) { double :bike, broken?: true}
 	let(:cat) { double :cat }
