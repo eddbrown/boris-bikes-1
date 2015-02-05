@@ -1,17 +1,26 @@
 require 'docking_station.rb'
-#require 'bike.rb'
 
 describe DockingStation do
 
+	let(:van) {double :van}
+	let(:broken_bike) {double :bike, broken?: true}
 	let(:station) { DockingStation.new(capacity: 123)}
-	let(:container) {double :container, bike_count: 0}
+	
 
-	it 'should allow setting default capacity on initialising' do
+	it 'should allow setting of a default capacity' do
 		expect(station.capacity).to eq(123)
 	end
 
-	it 'should say it is empty if it is empty' do
-		expect(container.empty?).to be_true
+	it 'should be empty if there are no bikes' do
+		expect(station.empty?(station.bike_count)).to eq true
 	end
+
+	it 'should know how many broken bikes at station' do
+		station.dock(broken_bike)
+		expect(station.broken_bike_count).to eq(1)
+
+	end
+
+
 
 end
